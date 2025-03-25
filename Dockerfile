@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Скопируем всё содержимое в контейнер
 COPY . .
 
-# Запуск Flask-приложения
-CMD ["python", "flask_server.py"]
+# Запуск через Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8883", "--workers", "3", "flask_server:app"]
