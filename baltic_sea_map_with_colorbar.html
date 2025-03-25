@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_15f537d2d8643e09e503a81fe355a0a1 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+  position: fixed; 
+  bottom: 10px; left: 10px; width: 290px; height: 107px; 
+  background-color: white; border:2px solid grey; z-index:9999; font-size:14px;
+  ">
+  &nbsp;&nbsp;&nbsp;&nbsp;Корреляция &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/processed_graphs/std_balt_map.png">Карта std</a><br>
+  &nbsp;<br>
+  &nbsp;&nbsp;<i>Низкая</i> &nbsp;<span style="background:linear-gradient(to right, #3a4cc0,#3c4fc3,#4054c7,#4258ca,#465dcf,#4860d1,#4c66d6,#506bda,#526edc,#5673e0,#5876e2,#5c7be5,#6080e8,#6383ea,#6788ed,#698bef,#6d90f1,#7093f3,#7497f5,#789bf7,#7b9ef8,#7fa2fa,#82a5fb,#86a9fc,#8aadfd,#8daffd,#91b3fe,#94b5fe,#98b9fe,#9bbbfe,#9fbefe,#a3c1fe,#a6c3fd,#aac6fd,#acc8fc,#b0cbfb,#b4cdfa,#b7cff9,#bbd1f7,#bdd2f6,#c1d4f4,#c5d5f2,#c7d6f0,#cad8ee,#cdd9ec,#d0dae9,#d2dae7,#d6dbe4,#d9dce0,#dbdcde,#dedbda,#e0dad7,#e3d9d3,#e6d7cf,#e7d6cc,#ead3c7,#ecd2c4,#edcfc0,#efcebc,#f1cbb8,#f2c8b3,#f3c6b0,#f4c3ab,#f5c1a8,#f6bda4,#f6ba9f,#f6b79c,#f7b397,#f7b194,#f7ad8f,#f6a98a,#f6a687,#f5a182,#f59e7f,#f49a7b,#f39678,#f29173,#f08d6f,#ef896c,#ed8467,#ec8064,#ea7b60,#e7755c,#e67259,#e36c54,#e16852,#de624e,#dc5e4b,#d95847,#d65243,#d34d40,#cf463d,#cd423a,#c93b37,#c53233,#c22d31,#be232d,#bb1a2b,#b60d28,#b30326);display:inline-block;width:150px;height:15px;"></span> &nbsp;<i>Высокая</i><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.96<br>
+  <small>&nbsp;&nbsp;Нажмите на маркер для просмотра данных станции</small>
+
+</div>
+    
+            <div class="folium-map" id="map_15f537d2d8643e09e503a81fe355a0a1" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_15f537d2d8643e09e503a81fe355a0a1 = L.map(
+                "map_15f537d2d8643e09e503a81fe355a0a1",
+                {
+                    center: [60.0, 23.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_bd1ff94cc8399affa7f0900f6917a319 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e Nikolay Borovets", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_bd1ff94cc8399affa7f0900f6917a319.addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+            var circle_marker_2011a52c0e7c5351ff0fbf4f336c33da = L.circleMarker(
+                [59.974849700927734, 30.179624557495117],
+                {"bubblingMouseEvents": true, "color": "#c22d31", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c22d31", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_d111524437d91377055ea64b6073c3f6 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_a8b4a8354a95a95c2c0a4ec11761a869 = $(`<div id="html_a8b4a8354a95a95c2c0a4ec11761a869" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> GornInst2<br><b>Корреляция:</b> 0.955<br><b>RMSE:</b> 8.83<br><b>BIAS:</b> 1.18<br><b>CRMSD:</b> 8.75<br><img src='processed_graphs/data/our_data/GornInst2/Daily_SLA_GornInst2_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/GornInst2/Regr-Welch-Coherence_GornInst2.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/GornInst2/Seasonal_BIAS_Boxplot_GornInst2_1993_-_2007.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/GornInst2/Seasonal_RMSE_Boxplot_GornInst2_1993_-_2007.png' width='150.0' height='150.0'></div>`)[0];
+                popup_d111524437d91377055ea64b6073c3f6.setContent(html_a8b4a8354a95a95c2c0a4ec11761a869);
+            
+        
+
+        circle_marker_2011a52c0e7c5351ff0fbf4f336c33da.bindPopup(popup_d111524437d91377055ea64b6073c3f6)
+        ;
+
+        
+    
+    
+            circle_marker_2011a52c0e7c5351ff0fbf4f336c33da.bindTooltip(
+                `<div>
+                     Станция: GornInst2 (корреляция: 0.955)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4294bd295d2f3763e0416104e12f05e3 = L.circleMarker(
+                [60.72483825683594, 28.6796817779541],
+                {"bubblingMouseEvents": true, "color": "#ce443c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ce443c", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_14690244e1139f0267034b93782706e2 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_e6c4d1640fcb933e7c43555b0b2b9f47 = $(`<div id="html_e6c4d1640fcb933e7c43555b0b2b9f47" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Vyborg2<br><b>Корреляция:</b> 0.950<br><b>RMSE:</b> 12.92<br><b>BIAS:</b> 9.48<br><b>CRMSD:</b> 8.78<br><img src='processed_graphs/data/our_data/Vyborg2/Daily_SLA_Vyborg2_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/Vyborg2/Regr-Welch-Coherence_Vyborg2.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/Vyborg2/Seasonal_BIAS_Boxplot_Vyborg2_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/Vyborg2/Seasonal_RMSE_Boxplot_Vyborg2_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_14690244e1139f0267034b93782706e2.setContent(html_e6c4d1640fcb933e7c43555b0b2b9f47);
+            
+        
+
+        circle_marker_4294bd295d2f3763e0416104e12f05e3.bindPopup(popup_14690244e1139f0267034b93782706e2)
+        ;
+
+        
+    
+    
+            circle_marker_4294bd295d2f3763e0416104e12f05e3.bindTooltip(
+                `<div>
+                     Станция: Vyborg2 (корреляция: 0.950)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_53483e475ea6c2eacd93c2bf59578a6c = L.circleMarker(
+                [58.908199310302734, 22.12437629699707],
+                {"bubblingMouseEvents": true, "color": "#f08b6d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f08b6d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_ab5b70dd0592e4466940782e9a85adb1 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_8b0a60844e1e934f0f6e356b9b145b16 = $(`<div id="html_8b0a60844e1e934f0f6e356b9b145b16" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Ristna2<br><b>Корреляция:</b> 0.930<br><b>RMSE:</b> 15.89<br><b>BIAS:</b> 12.97<br><b>CRMSD:</b> 9.19<br><img src='processed_graphs/data/our_data/Ristna2/Daily_SLA_Ristna2_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/Ristna2/Regr-Welch-Coherence_Ristna2.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/Ristna2/Seasonal_BIAS_Boxplot_Ristna2_1993_-_2009.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/Ristna2/Seasonal_RMSE_Boxplot_Ristna2_1993_-_2009.png' width='150.0' height='150.0'></div>`)[0];
+                popup_ab5b70dd0592e4466940782e9a85adb1.setContent(html_8b0a60844e1e934f0f6e356b9b145b16);
+            
+        
+
+        circle_marker_53483e475ea6c2eacd93c2bf59578a6c.bindPopup(popup_ab5b70dd0592e4466940782e9a85adb1)
+        ;
+
+        
+    
+    
+            circle_marker_53483e475ea6c2eacd93c2bf59578a6c.bindTooltip(
+                `<div>
+                     Станция: Ristna2 (корреляция: 0.930)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c6377e327d63f13fcff77257ecfca0e4 = L.circleMarker(
+                [59.974849700927734, 30.12407112121582],
+                {"bubblingMouseEvents": true, "color": "#c43032", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c43032", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_bee77d5d03fa4b0b89bcd59d37e76ebc = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_1c90cd89cd5cfcd2b0e6f34b742b95f2 = $(`<div id="html_1c90cd89cd5cfcd2b0e6f34b742b95f2" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kronstadt2<br><b>Корреляция:</b> 0.954<br><b>RMSE:</b> 14.75<br><b>BIAS:</b> 11.84<br><b>CRMSD:</b> 8.80<br><img src='processed_graphs/data/our_data/Kronstadt2/Daily_SLA_Kronstadt2_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/Kronstadt2/Regr-Welch-Coherence_Kronstadt2.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/Kronstadt2/Seasonal_BIAS_Boxplot_Kronstadt2_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/Kronstadt2/Seasonal_RMSE_Boxplot_Kronstadt2_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_bee77d5d03fa4b0b89bcd59d37e76ebc.setContent(html_1c90cd89cd5cfcd2b0e6f34b742b95f2);
+            
+        
+
+        circle_marker_c6377e327d63f13fcff77257ecfca0e4.bindPopup(popup_bee77d5d03fa4b0b89bcd59d37e76ebc)
+        ;
+
+        
+    
+    
+            circle_marker_c6377e327d63f13fcff77257ecfca0e4.bindTooltip(
+                `<div>
+                     Станция: Kronstadt2 (корреляция: 0.954)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4671712fb20288923e49c3c7ed76f1e6 = L.circleMarker(
+                [60.20817947387695, 25.013154983520508],
+                {"bubblingMouseEvents": true, "color": "#d65243", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d65243", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_2a68f6bb98d40bb663371e4dcb453359 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_d7d26e659e5e01030a8b18d20ee8cda7 = $(`<div id="html_d7d26e659e5e01030a8b18d20ee8cda7" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Helsinki<br><b>Корреляция:</b> 0.947<br><b>RMSE:</b> 13.53<br><b>BIAS:</b> 10.79<br><b>CRMSD:</b> 8.17<br><img src='processed_graphs/data/our_data/Helsinki/Daily_SLA_Helsinki_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/Helsinki/Regr-Welch-Coherence_Helsinki.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/Helsinki/Seasonal_BIAS_Boxplot_Helsinki_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/Helsinki/Seasonal_RMSE_Boxplot_Helsinki_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_2a68f6bb98d40bb663371e4dcb453359.setContent(html_d7d26e659e5e01030a8b18d20ee8cda7);
+            
+        
+
+        circle_marker_4671712fb20288923e49c3c7ed76f1e6.bindPopup(popup_2a68f6bb98d40bb663371e4dcb453359)
+        ;
+
+        
+    
+    
+            circle_marker_4671712fb20288923e49c3c7ed76f1e6.bindTooltip(
+                `<div>
+                     Станция: Helsinki (корреляция: 0.947)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_37dddb1d9e13952582b2b893c5699880 = L.circleMarker(
+                [60.55817413330078, 27.207515716552734],
+                {"bubblingMouseEvents": true, "color": "#cf463d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cf463d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_082755bc82c1902070211d0aa86b328c = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_478be28cbfc34ec53d826d522a078f9f = $(`<div id="html_478be28cbfc34ec53d826d522a078f9f" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Hamina<br><b>Корреляция:</b> 0.950<br><b>RMSE:</b> 14.36<br><b>BIAS:</b> 11.60<br><b>CRMSD:</b> 8.46<br><img src='processed_graphs/data/our_data/Hamina/Daily_SLA_Hamina_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/Hamina/Regr-Welch-Coherence_Hamina.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/Hamina/Seasonal_BIAS_Boxplot_Hamina_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/Hamina/Seasonal_RMSE_Boxplot_Hamina_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_082755bc82c1902070211d0aa86b328c.setContent(html_478be28cbfc34ec53d826d522a078f9f);
+            
+        
+
+        circle_marker_37dddb1d9e13952582b2b893c5699880.bindPopup(popup_082755bc82c1902070211d0aa86b328c)
+        ;
+
+        
+    
+    
+            circle_marker_37dddb1d9e13952582b2b893c5699880.bindTooltip(
+                `<div>
+                     Станция: Hamina (корреляция: 0.950)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2537ed9b81bc97d159e1ab929ca045c0 = L.circleMarker(
+                [59.87485122680664, 23.068784713745117],
+                {"bubblingMouseEvents": true, "color": "#d75444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d75444", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_633d3efad587d11ac44e530790265f45 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_41b87a2afdcf3b750ad9427fe6f75191 = $(`<div id="html_41b87a2afdcf3b750ad9427fe6f75191" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Hanko<br><b>Корреляция:</b> 0.947<br><b>RMSE:</b> 13.13<br><b>BIAS:</b> 10.44<br><b>CRMSD:</b> 7.97<br><img src='processed_graphs/data/our_data/Hanko/Daily_SLA_Hanko_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/our_data/Hanko/Regr-Welch-Coherence_Hanko.png' width='300' height='97'><br><img src='processed_graphs/data/our_data/Hanko/Seasonal_BIAS_Boxplot_Hanko_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/our_data/Hanko/Seasonal_RMSE_Boxplot_Hanko_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_633d3efad587d11ac44e530790265f45.setContent(html_41b87a2afdcf3b750ad9427fe6f75191);
+            
+        
+
+        circle_marker_2537ed9b81bc97d159e1ab929ca045c0.bindPopup(popup_633d3efad587d11ac44e530790265f45)
+        ;
+
+        
+    
+    
+            circle_marker_2537ed9b81bc97d159e1ab929ca045c0.bindTooltip(
+                `<div>
+                     Станция: Hanko (корреляция: 0.947)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_5693c814a9d4329a74549c7b609b51ae = L.circleMarker(
+                [59.974849700927734, 29.901857376098633],
+                {"bubblingMouseEvents": true, "color": "#c83835", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c83835", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_1aefb131fc42f673cf3632b1917b6658 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_9d001d7bafd2d6c55a97fbf70a44013b = $(`<div id="html_9d001d7bafd2d6c55a97fbf70a44013b" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Lomonosov<br><b>Корреляция:</b> 0.953<br><b>RMSE:</b> 13.52<br><b>BIAS:</b> 10.30<br><b>CRMSD:</b> 8.76<br><img src='processed_graphs/data/new_our_data/csv_files/Lomonosov/Daily_SLA_Lomonosov_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/csv_files/Lomonosov/Regr-Welch-Coherence_Lomonosov.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/csv_files/Lomonosov/Seasonal_BIAS_Boxplot_Lomonosov_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/csv_files/Lomonosov/Seasonal_RMSE_Boxplot_Lomonosov_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_1aefb131fc42f673cf3632b1917b6658.setContent(html_9d001d7bafd2d6c55a97fbf70a44013b);
+            
+        
+
+        circle_marker_5693c814a9d4329a74549c7b609b51ae.bindPopup(popup_1aefb131fc42f673cf3632b1917b6658)
+        ;
+
+        
+    
+    
+            circle_marker_5693c814a9d4329a74549c7b609b51ae.bindTooltip(
+                `<div>
+                     Станция: Lomonosov (корреляция: 0.953)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8afebb3d2e127c1818113ba9fdfc7e93 = L.circleMarker(
+                [60.17484664916992, 27.12418556213379],
+                {"bubblingMouseEvents": true, "color": "#da5a48", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#da5a48", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_0520c80c93ffe1f1814b3641302912ee = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_390943e742353f3f55a327f7dd853bad = $(`<div id="html_390943e742353f3f55a327f7dd853bad" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Gogland<br><b>Корреляция:</b> 0.945<br><b>RMSE:</b> 16.40<br><b>BIAS:</b> 13.63<br><b>CRMSD:</b> 9.12<br><img src='processed_graphs/data/new_our_data/csv_files/Gogland/Daily_SLA_Gogland_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/csv_files/Gogland/Regr-Welch-Coherence_Gogland.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/csv_files/Gogland/Seasonal_BIAS_Boxplot_Gogland_1993_-_1994.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/csv_files/Gogland/Seasonal_RMSE_Boxplot_Gogland_1993_-_1994.png' width='150.0' height='150.0'></div>`)[0];
+                popup_0520c80c93ffe1f1814b3641302912ee.setContent(html_390943e742353f3f55a327f7dd853bad);
+            
+        
+
+        circle_marker_8afebb3d2e127c1818113ba9fdfc7e93.bindPopup(popup_0520c80c93ffe1f1814b3641302912ee)
+        ;
+
+        
+    
+    
+            circle_marker_8afebb3d2e127c1818113ba9fdfc7e93.bindTooltip(
+                `<div>
+                     Станция: Gogland (корреляция: 0.945)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e80c1d8ba95b79791d2e6db98e73fe67 = L.circleMarker(
+                [59.60818862915039, 28.068593978881836],
+                {"bubblingMouseEvents": true, "color": "#cf463d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cf463d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_fe7a0f9135162f808b7fcda63021fb2c = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_aa1571fb803d98b954bf3c49eb39fe3c = $(`<div id="html_aa1571fb803d98b954bf3c49eb39fe3c" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Narva<br><b>Корреляция:</b> 0.950<br><b>RMSE:</b> 10.08<br><b>BIAS:</b> 5.20<br><b>CRMSD:</b> 8.63<br><img src='processed_graphs/data/new_our_data/csv_files/Narva/Daily_SLA_Narva_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/csv_files/Narva/Regr-Welch-Coherence_Narva.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/csv_files/Narva/Seasonal_BIAS_Boxplot_Narva_1993_-_2009.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/csv_files/Narva/Seasonal_RMSE_Boxplot_Narva_1993_-_2009.png' width='150.0' height='150.0'></div>`)[0];
+                popup_fe7a0f9135162f808b7fcda63021fb2c.setContent(html_aa1571fb803d98b954bf3c49eb39fe3c);
+            
+        
+
+        circle_marker_e80c1d8ba95b79791d2e6db98e73fe67.bindPopup(popup_fe7a0f9135162f808b7fcda63021fb2c)
+        ;
+
+        
+    
+    
+            circle_marker_e80c1d8ba95b79791d2e6db98e73fe67.bindTooltip(
+                `<div>
+                     Станция: Narva (корреляция: 0.950)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_01c199e3848f82133225e0786b3d264b = L.circleMarker(
+                [59.49152374267578, 24.81871795654297],
+                {"bubblingMouseEvents": true, "color": "#c43032", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c43032", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_2a158eeb848dbb6947bb7724d15db7a0 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_53195d7bc85fc6c224d50e003b4b109f = $(`<div id="html_53195d7bc85fc6c224d50e003b4b109f" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Tallinn<br><b>Корреляция:</b> 0.955<br><b>RMSE:</b> 13.02<br><b>BIAS:</b> 10.08<br><b>CRMSD:</b> 8.24<br><img src='processed_graphs/data/new_our_data/csv_files/Tallinn/Daily_SLA_Tallinn_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/csv_files/Tallinn/Regr-Welch-Coherence_Tallinn.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/csv_files/Tallinn/Seasonal_BIAS_Boxplot_Tallinn_1993_-_1995.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/csv_files/Tallinn/Seasonal_RMSE_Boxplot_Tallinn_1993_-_1995.png' width='150.0' height='150.0'></div>`)[0];
+                popup_2a158eeb848dbb6947bb7724d15db7a0.setContent(html_53195d7bc85fc6c224d50e003b4b109f);
+            
+        
+
+        circle_marker_01c199e3848f82133225e0786b3d264b.bindPopup(popup_2a158eeb848dbb6947bb7724d15db7a0)
+        ;
+
+        
+    
+    
+            circle_marker_01c199e3848f82133225e0786b3d264b.bindTooltip(
+                `<div>
+                     Станция: Tallinn (корреляция: 0.955)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d48f083d9f91292e3fc9459d9262578c = L.circleMarker(
+                [59.99151611328125, 29.23521614074707],
+                {"bubblingMouseEvents": true, "color": "#ca3d38", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ca3d38", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_ab35f7f105ad2c7043b2e0b7e215a782 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_ae8e1637e12e6fad0c81ceaa9dc77c6c = $(`<div id="html_ae8e1637e12e6fad0c81ceaa9dc77c6c" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Shepelevo<br><b>Корреляция:</b> 0.952<br><b>RMSE:</b> 14.79<br><b>BIAS:</b> 11.96<br><b>CRMSD:</b> 8.70<br><img src='processed_graphs/data/new_our_data/csv_files/Shepelevo/Daily_SLA_Shepelevo_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/csv_files/Shepelevo/Regr-Welch-Coherence_Shepelevo.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/csv_files/Shepelevo/Seasonal_BIAS_Boxplot_Shepelevo_1993_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/csv_files/Shepelevo/Seasonal_RMSE_Boxplot_Shepelevo_1993_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_ab35f7f105ad2c7043b2e0b7e215a782.setContent(html_ae8e1637e12e6fad0c81ceaa9dc77c6c);
+            
+        
+
+        circle_marker_d48f083d9f91292e3fc9459d9262578c.bindPopup(popup_ab35f7f105ad2c7043b2e0b7e215a782)
+        ;
+
+        
+    
+    
+            circle_marker_d48f083d9f91292e3fc9459d9262578c.bindTooltip(
+                `<div>
+                     Станция: Shepelevo (корреляция: 0.952)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e61431ed16412c9e2e107323677df6c2 = L.circleMarker(
+                [55.65825271606445, 21.152191162109375],
+                {"bubblingMouseEvents": true, "color": "#ed8467", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ed8467", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_e4164543613b9fab06a6d39821bd34d8 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_33e4084a9034a9254e788fc02e9080ab = $(`<div id="html_33e4084a9034a9254e788fc02e9080ab" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Klaipeda<br><b>Корреляция:</b> 0.933<br><b>RMSE:</b> 9.14<br><b>BIAS:</b> -2.35<br><b>CRMSD:</b> 8.83<br><img src='processed_graphs/data/new_our_data/csv_files/Klaipeda/Daily_SLA_Klaipeda_slice_31.05.1997_-_30.05.1998.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/csv_files/Klaipeda/Regr-Welch-Coherence_Klaipeda.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/csv_files/Klaipeda/Seasonal_BIAS_Boxplot_Klaipeda_1997_-_2007.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/csv_files/Klaipeda/Seasonal_RMSE_Boxplot_Klaipeda_1997_-_2007.png' width='150.0' height='150.0'></div>`)[0];
+                popup_e4164543613b9fab06a6d39821bd34d8.setContent(html_33e4084a9034a9254e788fc02e9080ab);
+            
+        
+
+        circle_marker_e61431ed16412c9e2e107323677df6c2.bindPopup(popup_e4164543613b9fab06a6d39821bd34d8)
+        ;
+
+        
+    
+    
+            circle_marker_e61431ed16412c9e2e107323677df6c2.bindTooltip(
+                `<div>
+                     Станция: Klaipeda (корреляция: 0.933)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_bf77207589cb0230ad1fde81f8ce3f64 = L.circleMarker(
+                [54.991600036621094, 21.013307571411133],
+                {"bubblingMouseEvents": true, "color": "#3a4cc0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3a4cc0", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_7e1d6e0143156aad5eeb2ebf725d44cb = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_2f59725e180739ce3a64791d493a396b = $(`<div id="html_2f59725e180739ce3a64791d493a396b" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Otkrytoe<br><b>Корреляция:</b> 0.820<br><b>RMSE:</b> 15.58<br><b>BIAS:</b> -5.61<br><b>CRMSD:</b> 14.53<br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Otkrytoe/Daily_SLA_Otkrytoe_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Otkrytoe/Regr-Welch-Coherence_Otkrytoe.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Otkrytoe/Seasonal_BIAS_Boxplot_Otkrytoe_1993_-_2014.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Otkrytoe/Seasonal_RMSE_Boxplot_Otkrytoe_1993_-_2014.png' width='150.0' height='150.0'></div>`)[0];
+                popup_7e1d6e0143156aad5eeb2ebf725d44cb.setContent(html_2f59725e180739ce3a64791d493a396b);
+            
+        
+
+        circle_marker_bf77207589cb0230ad1fde81f8ce3f64.bindPopup(popup_7e1d6e0143156aad5eeb2ebf725d44cb)
+        ;
+
+        
+    
+    
+            circle_marker_bf77207589cb0230ad1fde81f8ce3f64.bindTooltip(
+                `<div>
+                     Станция: Otkrytoe (корреляция: 0.820)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e562d2fd017d2b6ddd69dc172063908f = L.circleMarker(
+                [54.95826721191406, 20.18000602722168],
+                {"bubblingMouseEvents": true, "color": "#f4c3ab", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f4c3ab", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_a73a14dd03ab45175c86bfe3fd6d34bd = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_4b7211703cee2671bd1b860c9eba6657 = $(`<div id="html_4b7211703cee2671bd1b860c9eba6657" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kaliningrad<br><b>Корреляция:</b> 0.909<br><b>RMSE:</b> 10.53<br><b>BIAS:</b> -2.06<br><b>CRMSD:</b> 10.32<br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Kaliningrad/Daily_SLA_Kaliningrad_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Kaliningrad/Regr-Welch-Coherence_Kaliningrad.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Kaliningrad/Seasonal_BIAS_Boxplot_Kaliningrad_1993_-_2007.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Kaliningrad/Seasonal_RMSE_Boxplot_Kaliningrad_1993_-_2007.png' width='150.0' height='150.0'></div>`)[0];
+                popup_a73a14dd03ab45175c86bfe3fd6d34bd.setContent(html_4b7211703cee2671bd1b860c9eba6657);
+            
+        
+
+        circle_marker_e562d2fd017d2b6ddd69dc172063908f.bindPopup(popup_a73a14dd03ab45175c86bfe3fd6d34bd)
+        ;
+
+        
+    
+    
+            circle_marker_e562d2fd017d2b6ddd69dc172063908f.bindTooltip(
+                `<div>
+                     Станция: Kaliningrad (корреляция: 0.909)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_9aa7ee5f26d52709b3a2fe750ebcfee6 = L.circleMarker(
+                [54.62493896484375, 20.01334571838379],
+                {"bubblingMouseEvents": true, "color": "#f6a98a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f6a98a", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_893906fcf85b83ca7c05dd849dab0bca = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_86a8852f4fea8e9973b2d1ca6e80f5e0 = $(`<div id="html_86a8852f4fea8e9973b2d1ca6e80f5e0" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Baltijsk<br><b>Корреляция:</b> 0.920<br><b>RMSE:</b> 9.69<br><b>BIAS:</b> 0.82<br><b>CRMSD:</b> 9.65<br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Baltijsk/Daily_SLA_Baltijsk_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Baltijsk/Regr-Welch-Coherence_Baltijsk.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Baltijsk/Seasonal_BIAS_Boxplot_Baltijsk_1993_-_2014.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Baltijsk/Seasonal_RMSE_Boxplot_Baltijsk_1993_-_2014.png' width='150.0' height='150.0'></div>`)[0];
+                popup_893906fcf85b83ca7c05dd849dab0bca.setContent(html_86a8852f4fea8e9973b2d1ca6e80f5e0);
+            
+        
+
+        circle_marker_9aa7ee5f26d52709b3a2fe750ebcfee6.bindPopup(popup_893906fcf85b83ca7c05dd849dab0bca)
+        ;
+
+        
+    
+    
+            circle_marker_9aa7ee5f26d52709b3a2fe750ebcfee6.bindTooltip(
+                `<div>
+                     Станция: Baltijsk (корреляция: 0.920)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7b92a336e680391d0da38f7403d4a2bf = L.circleMarker(
+                [54.95826721191406, 20.457773208618164],
+                {"bubblingMouseEvents": true, "color": "#f39879", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f39879", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_6d6cad96d54f6b0644a3d49754fbe517 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_57e79e9a7452f18a4d96bd9167a3889b = $(`<div id="html_57e79e9a7452f18a4d96bd9167a3889b" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Pionersky<br><b>Корреляция:</b> 0.926<br><b>RMSE:</b> 9.91<br><b>BIAS:</b> 2.88<br><b>CRMSD:</b> 9.48<br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Pionersky/Daily_SLA_Pionersky_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Pionersky/Regr-Welch-Coherence_Pionersky.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Pionersky/Seasonal_BIAS_Boxplot_Pionersky_1993_-_2014.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Pionersky/Seasonal_RMSE_Boxplot_Pionersky_1993_-_2014.png' width='150.0' height='150.0'></div>`)[0];
+                popup_6d6cad96d54f6b0644a3d49754fbe517.setContent(html_57e79e9a7452f18a4d96bd9167a3889b);
+            
+        
+
+        circle_marker_7b92a336e680391d0da38f7403d4a2bf.bindPopup(popup_6d6cad96d54f6b0644a3d49754fbe517)
+        ;
+
+        
+    
+    
+            circle_marker_7b92a336e680391d0da38f7403d4a2bf.bindTooltip(
+                `<div>
+                     Станция: Pionersky (корреляция: 0.926)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e4f9fcdc758f8cf3ac8c3cbec867df4a = L.circleMarker(
+                [54.524940490722656, 19.957792282104492],
+                {"bubblingMouseEvents": true, "color": "#a2c0fe", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#a2c0fe", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_3654da9d783868567da868d4fb03d1d0 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_e6e405ae51aa6b77efd97a0bf6d9620e = $(`<div id="html_e6e405ae51aa6b77efd97a0bf6d9620e" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Krasnoflotskoe<br><b>Корреляция:</b> 0.864<br><b>RMSE:</b> 12.32<br><b>BIAS:</b> -0.43<br><b>CRMSD:</b> 12.31<br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Krasnoflotskoe/Daily_SLA_Krasnoflotskoe_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Krasnoflotskoe/Regr-Welch-Coherence_Krasnoflotskoe.png' width='300' height='97'><br><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Krasnoflotskoe/Seasonal_BIAS_Boxplot_Krasnoflotskoe_1993_-_2014.png' width='150.0' height='150.0'><img src='processed_graphs/data/new_our_data/day_to_csv_minus500_index_files/Krasnoflotskoe/Seasonal_RMSE_Boxplot_Krasnoflotskoe_1993_-_2014.png' width='150.0' height='150.0'></div>`)[0];
+                popup_3654da9d783868567da868d4fb03d1d0.setContent(html_e6e405ae51aa6b77efd97a0bf6d9620e);
+            
+        
+
+        circle_marker_e4f9fcdc758f8cf3ac8c3cbec867df4a.bindPopup(popup_3654da9d783868567da868d4fb03d1d0)
+        ;
+
+        
+    
+    
+            circle_marker_e4f9fcdc758f8cf3ac8c3cbec867df4a.bindTooltip(
+                `<div>
+                     Станция: Krasnoflotskoe (корреляция: 0.864)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_51398e24e4b0a7bfb11ce0d57f995752 = L.circleMarker(
+                [59.57485580444336, 24.81871795654297],
+                {"bubblingMouseEvents": true, "color": "#f18e70", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f18e70", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_f54c3354d196afff1d69f74cbebe58c9 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_43bc8e829ba9fcccd802628722f41b09 = $(`<div id="html_43bc8e829ba9fcccd802628722f41b09" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Leppneeme_nc<br><b>Корреляция:</b> 0.929<br><b>RMSE:</b> 20.29<br><b>BIAS:</b> 18.09<br><b>CRMSD:</b> 9.20<br><img src='processed_graphs/data/netcdf_data/Leppneeme_nc/Daily_SLA_Leppneeme_nc_slice_07.02.2017_-_06.02.2018.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Leppneeme_nc/Regr-Welch-Coherence_Leppneeme_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Leppneeme_nc/Seasonal_BIAS_Boxplot_Leppneeme_nc_2017_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Leppneeme_nc/Seasonal_RMSE_Boxplot_Leppneeme_nc_2017_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_f54c3354d196afff1d69f74cbebe58c9.setContent(html_43bc8e829ba9fcccd802628722f41b09);
+            
+        
+
+        circle_marker_51398e24e4b0a7bfb11ce0d57f995752.bindPopup(popup_f54c3354d196afff1d69f74cbebe58c9)
+        ;
+
+        
+    
+    
+            circle_marker_51398e24e4b0a7bfb11ce0d57f995752.bindTooltip(
+                `<div>
+                     Станция: Leppneeme_nc (корреляция: 0.929)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1d3b482c95aa77128a26fcdf621f2417 = L.circleMarker(
+                [59.558189392089844, 26.40199089050293],
+                {"bubblingMouseEvents": true, "color": "#d85646", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d85646", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_bca628cf26bde8ecdf2088adf5558e9f = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_a5906b1bb6fd2266f08da2b7c26f28ab = $(`<div id="html_a5906b1bb6fd2266f08da2b7c26f28ab" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Eisma_nc<br><b>Корреляция:</b> 0.946<br><b>RMSE:</b> 21.95<br><b>BIAS:</b> 20.27<br><b>CRMSD:</b> 8.42<br><img src='processed_graphs/data/netcdf_data/Eisma_nc/Daily_SLA_Eisma_nc_slice_07.02.2017_-_06.02.2018.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Eisma_nc/Regr-Welch-Coherence_Eisma_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Eisma_nc/Seasonal_BIAS_Boxplot_Eisma_nc_2017_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Eisma_nc/Seasonal_RMSE_Boxplot_Eisma_nc_2017_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_bca628cf26bde8ecdf2088adf5558e9f.setContent(html_a5906b1bb6fd2266f08da2b7c26f28ab);
+            
+        
+
+        circle_marker_1d3b482c95aa77128a26fcdf621f2417.bindPopup(popup_bca628cf26bde8ecdf2088adf5558e9f)
+        ;
+
+        
+    
+    
+            circle_marker_1d3b482c95aa77128a26fcdf621f2417.bindTooltip(
+                `<div>
+                     Станция: Eisma_nc (корреляция: 0.946)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_da21a4e958f25f7a9da9376eaa7c39ff = L.circleMarker(
+                [54.641605377197266, 16.874576568603516],
+                {"bubblingMouseEvents": true, "color": "#f5a182", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f5a182", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_e8293458767ef3cb8bc69af0bfc9ccec = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_e1d2cff29c437d5e9b977158d250e854 = $(`<div id="html_e1d2cff29c437d5e9b977158d250e854" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Ustka_nc<br><b>Корреляция:</b> 0.923<br><b>RMSE:</b> 9.48<br><b>BIAS:</b> -3.85<br><b>CRMSD:</b> 8.67<br><img src='processed_graphs/data/netcdf_data/Ustka_nc/Daily_SLA_Ustka_nc_slice_02.03.2005_-_22.12.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Ustka_nc/Regr-Welch-Coherence_Ustka_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Ustka_nc/Seasonal_BIAS_Boxplot_Ustka_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Ustka_nc/Seasonal_RMSE_Boxplot_Ustka_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_e8293458767ef3cb8bc69af0bfc9ccec.setContent(html_e1d2cff29c437d5e9b977158d250e854);
+            
+        
+
+        circle_marker_da21a4e958f25f7a9da9376eaa7c39ff.bindPopup(popup_e8293458767ef3cb8bc69af0bfc9ccec)
+        ;
+
+        
+    
+    
+            circle_marker_da21a4e958f25f7a9da9376eaa7c39ff.bindTooltip(
+                `<div>
+                     Станция: Ustka_nc (корреляция: 0.923)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a9e53eb995c9066cbb71f90f228412da = L.circleMarker(
+                [54.608272552490234, 18.874500274658203],
+                {"bubblingMouseEvents": true, "color": "#b30326", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b30326", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_04765c1c65082e517992d8e5936d93cb = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_ba34ab62c1e9b452e29654c611cbac9f = $(`<div id="html_ba34ab62c1e9b452e29654c611cbac9f" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Hel_nc<br><b>Корреляция:</b> 0.961<br><b>RMSE:</b> 15.15<br><b>BIAS:</b> -13.13<br><b>CRMSD:</b> 7.57<br><img src='processed_graphs/data/netcdf_data/Hel_nc/Daily_SLA_Hel_nc_slice_10.02.2006_-_14.11.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Hel_nc/Regr-Welch-Coherence_Hel_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Hel_nc/Seasonal_BIAS_Boxplot_Hel_nc_2006_-_2006.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Hel_nc/Seasonal_RMSE_Boxplot_Hel_nc_2006_-_2006.png' width='150.0' height='150.0'></div>`)[0];
+                popup_04765c1c65082e517992d8e5936d93cb.setContent(html_ba34ab62c1e9b452e29654c611cbac9f);
+            
+        
+
+        circle_marker_a9e53eb995c9066cbb71f90f228412da.bindPopup(popup_04765c1c65082e517992d8e5936d93cb)
+        ;
+
+        
+    
+    
+            circle_marker_a9e53eb995c9066cbb71f90f228412da.bindTooltip(
+                `<div>
+                     Станция: Hel_nc (корреляция: 0.961)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_3c6c6fc83d5f687725e554e53ec6637e = L.circleMarker(
+                [57.74155044555664, 22.624357223510742],
+                {"bubblingMouseEvents": true, "color": "#e57057", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e57057", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_7ec34f9f80ad6097d4245b57b3f8293b = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_6d60ef093bb7aa834680e2f866850eeb = $(`<div id="html_6d60ef093bb7aa834680e2f866850eeb" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kolka_nc<br><b>Корреляция:</b> 0.939<br><b>RMSE:</b> 12.71<br><b>BIAS:</b> 8.88<br><b>CRMSD:</b> 9.10<br><img src='processed_graphs/data/netcdf_data/Kolka_nc/Daily_SLA_Kolka_nc_slice_27.01.2005_-_27.05.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Kolka_nc/Regr-Welch-Coherence_Kolka_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Kolka_nc/Seasonal_BIAS_Boxplot_Kolka_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Kolka_nc/Seasonal_RMSE_Boxplot_Kolka_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_7ec34f9f80ad6097d4245b57b3f8293b.setContent(html_6d60ef093bb7aa834680e2f866850eeb);
+            
+        
+
+        circle_marker_3c6c6fc83d5f687725e554e53ec6637e.bindPopup(popup_7ec34f9f80ad6097d4245b57b3f8293b)
+        ;
+
+        
+    
+    
+            circle_marker_3c6c6fc83d5f687725e554e53ec6637e.bindTooltip(
+                `<div>
+                     Станция: Kolka_nc (корреляция: 0.939)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_30d9b0d3bb353929892acfe7388a0ce9 = L.circleMarker(
+                [58.54153823852539, 23.596542358398438],
+                {"bubblingMouseEvents": true, "color": "#d44f42", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d44f42", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_2a64eb3d1e36ccca4f9aa6aad124c883 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_4315730dc097ebcb3e95759933066d02 = $(`<div id="html_4315730dc097ebcb3e95759933066d02" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Virtsu_nc<br><b>Корреляция:</b> 0.947<br><b>RMSE:</b> 14.81<br><b>BIAS:</b> 12.08<br><b>CRMSD:</b> 8.58<br><img src='processed_graphs/data/netcdf_data/Virtsu_nc/Daily_SLA_Virtsu_nc_slice_01.12.2009_-_16.02.2011.png' width='300' height='111'><br><img src='processed_graphs/data/netcdf_data/Virtsu_nc/Regr-Welch-Coherence_Virtsu_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Virtsu_nc/Seasonal_BIAS_Boxplot_Virtsu_nc_2009_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Virtsu_nc/Seasonal_RMSE_Boxplot_Virtsu_nc_2009_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_2a64eb3d1e36ccca4f9aa6aad124c883.setContent(html_4315730dc097ebcb3e95759933066d02);
+            
+        
+
+        circle_marker_30d9b0d3bb353929892acfe7388a0ce9.bindPopup(popup_2a64eb3d1e36ccca4f9aa6aad124c883)
+        ;
+
+        
+    
+    
+            circle_marker_30d9b0d3bb353929892acfe7388a0ce9.bindTooltip(
+                `<div>
+                     Станция: Virtsu_nc (корреляция: 0.947)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d16a6509751bd99b1867e2ef299cda22 = L.circleMarker(
+                [61.191497802734375, 21.42995834350586],
+                {"bubblingMouseEvents": true, "color": "#e7755c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e7755c", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_e273ba403ebdccefb6f4dbf92b79aa50 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_ca312416f05414e15abce741a2c8e4b0 = $(`<div id="html_ca312416f05414e15abce741a2c8e4b0" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Rauma_nc<br><b>Корреляция:</b> 0.937<br><b>RMSE:</b> 12.78<br><b>BIAS:</b> 9.39<br><b>CRMSD:</b> 8.67<br><img src='processed_graphs/data/netcdf_data/Rauma_nc/Daily_SLA_Rauma_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Rauma_nc/Regr-Welch-Coherence_Rauma_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Rauma_nc/Seasonal_BIAS_Boxplot_Rauma_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Rauma_nc/Seasonal_RMSE_Boxplot_Rauma_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_e273ba403ebdccefb6f4dbf92b79aa50.setContent(html_ca312416f05414e15abce741a2c8e4b0);
+            
+        
+
+        circle_marker_d16a6509751bd99b1867e2ef299cda22.bindPopup(popup_e273ba403ebdccefb6f4dbf92b79aa50)
+        ;
+
+        
+    
+    
+            circle_marker_d16a6509751bd99b1867e2ef299cda22.bindTooltip(
+                `<div>
+                     Станция: Rauma_nc (корреляция: 0.937)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d1b4e965de31dbf79be84c847a356afe = L.circleMarker(
+                [58.17487716674805, 24.207630157470703],
+                {"bubblingMouseEvents": true, "color": "#b60d28", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b60d28", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_418020e0537d6c512b9d922331f82db9 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_2c67322dd19fb72b7e6f8cd7ecabd8a2 = $(`<div id="html_2c67322dd19fb72b7e6f8cd7ecabd8a2" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Munalaid_nc<br><b>Корреляция:</b> 0.960<br><b>RMSE:</b> 17.96<br><b>BIAS:</b> 15.94<br><b>CRMSD:</b> 8.28<br><img src='processed_graphs/data/netcdf_data/Munalaid_nc/Daily_SLA_Munalaid_nc_slice_03.02.2016_-_05.02.2017.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Munalaid_nc/Regr-Welch-Coherence_Munalaid_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Munalaid_nc/Seasonal_BIAS_Boxplot_Munalaid_nc_2016_-_2020.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Munalaid_nc/Seasonal_RMSE_Boxplot_Munalaid_nc_2016_-_2020.png' width='150.0' height='150.0'></div>`)[0];
+                popup_418020e0537d6c512b9d922331f82db9.setContent(html_2c67322dd19fb72b7e6f8cd7ecabd8a2);
+            
+        
+
+        circle_marker_d1b4e965de31dbf79be84c847a356afe.bindPopup(popup_418020e0537d6c512b9d922331f82db9)
+        ;
+
+        
+    
+    
+            circle_marker_d1b4e965de31dbf79be84c847a356afe.bindTooltip(
+                `<div>
+                     Станция: Munalaid_nc (корреляция: 0.960)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f294c50145e3e63e72fb10b2262ae1f8 = L.circleMarker(
+                [63.75812530517578, 22.624357223510742],
+                {"bubblingMouseEvents": true, "color": "#ec8064", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ec8064", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_7067401647d8bc4ca57820d1872274c7 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_c8f2ee88565d295892e8e6872914cd09 = $(`<div id="html_c8f2ee88565d295892e8e6872914cd09" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Pietarsaari_nc<br><b>Корреляция:</b> 0.934<br><b>RMSE:</b> 14.81<br><b>BIAS:</b> 11.42<br><b>CRMSD:</b> 9.42<br><img src='processed_graphs/data/netcdf_data/Pietarsaari_nc/Daily_SLA_Pietarsaari_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Pietarsaari_nc/Regr-Welch-Coherence_Pietarsaari_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Pietarsaari_nc/Seasonal_BIAS_Boxplot_Pietarsaari_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Pietarsaari_nc/Seasonal_RMSE_Boxplot_Pietarsaari_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_7067401647d8bc4ca57820d1872274c7.setContent(html_c8f2ee88565d295892e8e6872914cd09);
+            
+        
+
+        circle_marker_f294c50145e3e63e72fb10b2262ae1f8.bindPopup(popup_7067401647d8bc4ca57820d1872274c7)
+        ;
+
+        
+    
+    
+            circle_marker_f294c50145e3e63e72fb10b2262ae1f8.bindTooltip(
+                `<div>
+                     Станция: Pietarsaari_nc (корреляция: 0.934)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d8939f0a6102f3b67c0571a1be5bbd2b = L.circleMarker(
+                [58.524871826171875, 23.485435485839844],
+                {"bubblingMouseEvents": true, "color": "#f6a789", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f6a789", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_bac402f10b867e37f67b17d45f4ec7b0 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_2f9eb7b75539276efb8fd9206a5c20d9 = $(`<div id="html_2f9eb7b75539276efb8fd9206a5c20d9" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kuivastu_nc<br><b>Корреляция:</b> 0.920<br><b>RMSE:</b> 18.47<br><b>BIAS:</b> 15.60<br><b>CRMSD:</b> 9.90<br><img src='processed_graphs/data/netcdf_data/Kuivastu_nc/Daily_SLA_Kuivastu_nc_slice_23.03.2010_-_22.03.2011.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Kuivastu_nc/Regr-Welch-Coherence_Kuivastu_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Kuivastu_nc/Seasonal_BIAS_Boxplot_Kuivastu_nc_2010_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Kuivastu_nc/Seasonal_RMSE_Boxplot_Kuivastu_nc_2010_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_bac402f10b867e37f67b17d45f4ec7b0.setContent(html_2f9eb7b75539276efb8fd9206a5c20d9);
+            
+        
+
+        circle_marker_d8939f0a6102f3b67c0571a1be5bbd2b.bindPopup(popup_bac402f10b867e37f67b17d45f4ec7b0)
+        ;
+
+        
+    
+    
+            circle_marker_d8939f0a6102f3b67c0571a1be5bbd2b.bindTooltip(
+                `<div>
+                     Станция: Kuivastu_nc (корреляция: 0.920)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b36fc8e7e0319909ea01651a84d88797 = L.circleMarker(
+                [54.39160919189453, 18.707839965820312],
+                {"bubblingMouseEvents": true, "color": "#a6c3fd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#a6c3fd", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_179c78676ceb895c01b6b63a41313f22 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_401b17a919467b1498c8e2572cdbb01c = $(`<div id="html_401b17a919467b1498c8e2572cdbb01c" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Gdansk_nc<br><b>Корреляция:</b> 0.865<br><b>RMSE:</b> 13.06<br><b>BIAS:</b> -6.09<br><b>CRMSD:</b> 11.55<br><img src='processed_graphs/data/netcdf_data/Gdansk_nc/Daily_SLA_Gdansk_nc_slice_02.03.2005_-_22.12.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Gdansk_nc/Regr-Welch-Coherence_Gdansk_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Gdansk_nc/Seasonal_BIAS_Boxplot_Gdansk_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Gdansk_nc/Seasonal_RMSE_Boxplot_Gdansk_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_179c78676ceb895c01b6b63a41313f22.setContent(html_401b17a919467b1498c8e2572cdbb01c);
+            
+        
+
+        circle_marker_b36fc8e7e0319909ea01651a84d88797.bindPopup(popup_179c78676ceb895c01b6b63a41313f22)
+        ;
+
+        
+    
+    
+            circle_marker_b36fc8e7e0319909ea01651a84d88797.bindTooltip(
+                `<div>
+                     Станция: Gdansk_nc (корреляция: 0.865)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2d4ab5cc7f7cfb10708da8a1b945e962 = L.circleMarker(
+                [59.75818634033203, 24.652057647705078],
+                {"bubblingMouseEvents": true, "color": "#f6a98a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f6a98a", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_b082be54fa34f1f233017c4d14e1f9dc = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_8af0b2eff9c7caecf949acafe549fee3 = $(`<div id="html_8af0b2eff9c7caecf949acafe549fee3" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Tallinnamadal_nc<br><b>Корреляция:</b> 0.920<br><b>RMSE:</b> 19.03<br><b>BIAS:</b> 16.24<br><b>CRMSD:</b> 9.93<br><img src='processed_graphs/data/netcdf_data/Tallinnamadal_nc/Daily_SLA_Tallinnamadal_nc_slice_12.01.2012_-_01.04.2013.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Tallinnamadal_nc/Regr-Welch-Coherence_Tallinnamadal_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Tallinnamadal_nc/Seasonal_BIAS_Boxplot_Tallinnamadal_nc_2012_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Tallinnamadal_nc/Seasonal_RMSE_Boxplot_Tallinnamadal_nc_2012_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_b082be54fa34f1f233017c4d14e1f9dc.setContent(html_8af0b2eff9c7caecf949acafe549fee3);
+            
+        
+
+        circle_marker_2d4ab5cc7f7cfb10708da8a1b945e962.bindPopup(popup_b082be54fa34f1f233017c4d14e1f9dc)
+        ;
+
+        
+    
+    
+            circle_marker_2d4ab5cc7f7cfb10708da8a1b945e962.bindTooltip(
+                `<div>
+                     Станция: Tallinnamadal_nc (корреляция: 0.920)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_6c5d7fe085e3912a394fb2e720a09d89 = L.circleMarker(
+                [59.4081916809082, 27.818603515625],
+                {"bubblingMouseEvents": true, "color": "#d0dae9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d0dae9", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_4668d782681cfb9098dc1d6f807c493d = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_4bf89bbfaf4494eb0253b9033c1806c3 = $(`<div id="html_4bf89bbfaf4494eb0253b9033c1806c3" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Sillamae_nc<br><b>Корреляция:</b> 0.884<br><b>RMSE:</b> 15.47<br><b>BIAS:</b> 8.85<br><b>CRMSD:</b> 12.69<br><img src='processed_graphs/data/netcdf_data/Sillamae_nc/Daily_SLA_Sillamae_nc_slice_23.10.2006_-_13.11.2007.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Sillamae_nc/Regr-Welch-Coherence_Sillamae_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Sillamae_nc/Seasonal_BIAS_Boxplot_Sillamae_nc_2006_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Sillamae_nc/Seasonal_RMSE_Boxplot_Sillamae_nc_2006_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_4668d782681cfb9098dc1d6f807c493d.setContent(html_4bf89bbfaf4494eb0253b9033c1806c3);
+            
+        
+
+        circle_marker_6c5d7fe085e3912a394fb2e720a09d89.bindPopup(popup_4668d782681cfb9098dc1d6f807c493d)
+        ;
+
+        
+    
+    
+            circle_marker_6c5d7fe085e3912a394fb2e720a09d89.bindTooltip(
+                `<div>
+                     Станция: Sillamae_nc (корреляция: 0.884)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_aab836d50b18a736a3d8b4f040224587 = L.circleMarker(
+                [53.77495193481445, 13.985797882080078],
+                {"bubblingMouseEvents": true, "color": "#e6d7cf", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6d7cf", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_e5202cd39e7a23ccaef865f83926ca61 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_abb4362a38ded8e72617c34538081aa8 = $(`<div id="html_abb4362a38ded8e72617c34538081aa8" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Ueckermuende_nc<br><b>Корреляция:</b> 0.896<br><b>RMSE:</b> 9.66<br><b>BIAS:</b> 1.56<br><b>CRMSD:</b> 9.53<br><img src='processed_graphs/data/netcdf_data/Ueckermuende_nc/Daily_SLA_Ueckermuende_nc_slice_27.01.2011_-_29.01.2012.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Ueckermuende_nc/Regr-Welch-Coherence_Ueckermuende_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Ueckermuende_nc/Seasonal_BIAS_Boxplot_Ueckermuende_nc_2011_-_2020.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Ueckermuende_nc/Seasonal_RMSE_Boxplot_Ueckermuende_nc_2011_-_2020.png' width='150.0' height='150.0'></div>`)[0];
+                popup_e5202cd39e7a23ccaef865f83926ca61.setContent(html_abb4362a38ded8e72617c34538081aa8);
+            
+        
+
+        circle_marker_aab836d50b18a736a3d8b4f040224587.bindPopup(popup_e5202cd39e7a23ccaef865f83926ca61)
+        ;
+
+        
+    
+    
+            circle_marker_aab836d50b18a736a3d8b4f040224587.bindTooltip(
+                `<div>
+                     Станция: Ueckermuende_nc (корреляция: 0.896)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b43a79e9031aa7351cb7daafa8704287 = L.circleMarker(
+                [62.374813079833984, 21.26329803466797],
+                {"bubblingMouseEvents": true, "color": "#f08b6d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f08b6d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_c32a3de6963ca61126667b08fc4fbbf3 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_fb3d80c1d6f557caa907e7aca0e97f3b = $(`<div id="html_fb3d80c1d6f557caa907e7aca0e97f3b" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kaskinen_nc<br><b>Корреляция:</b> 0.930<br><b>RMSE:</b> 13.53<br><b>BIAS:</b> 10.09<br><b>CRMSD:</b> 9.01<br><img src='processed_graphs/data/netcdf_data/Kaskinen_nc/Daily_SLA_Kaskinen_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Kaskinen_nc/Regr-Welch-Coherence_Kaskinen_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Kaskinen_nc/Seasonal_BIAS_Boxplot_Kaskinen_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Kaskinen_nc/Seasonal_RMSE_Boxplot_Kaskinen_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_c32a3de6963ca61126667b08fc4fbbf3.setContent(html_fb3d80c1d6f557caa907e7aca0e97f3b);
+            
+        
+
+        circle_marker_b43a79e9031aa7351cb7daafa8704287.bindPopup(popup_c32a3de6963ca61126667b08fc4fbbf3)
+        ;
+
+        
+    
+    
+            circle_marker_b43a79e9031aa7351cb7daafa8704287.bindTooltip(
+                `<div>
+                     Станция: Kaskinen_nc (корреляция: 0.930)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1f98cd3440445eea9dfe569f12f5cba0 = L.circleMarker(
+                [63.12480163574219, 21.541065216064453],
+                {"bubblingMouseEvents": true, "color": "#ea7d61", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ea7d61", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_c4eb5cbe94ea16dd0f569a142f589b38 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_872d0d4f1c0eaebfc94397fa4631d4ee = $(`<div id="html_872d0d4f1c0eaebfc94397fa4631d4ee" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Vaasa_nc<br><b>Корреляция:</b> 0.935<br><b>RMSE:</b> 14.19<br><b>BIAS:</b> 10.96<br><b>CRMSD:</b> 9.01<br><img src='processed_graphs/data/netcdf_data/Vaasa_nc/Daily_SLA_Vaasa_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Vaasa_nc/Regr-Welch-Coherence_Vaasa_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Vaasa_nc/Seasonal_BIAS_Boxplot_Vaasa_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Vaasa_nc/Seasonal_RMSE_Boxplot_Vaasa_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_c4eb5cbe94ea16dd0f569a142f589b38.setContent(html_872d0d4f1c0eaebfc94397fa4631d4ee);
+            
+        
+
+        circle_marker_1f98cd3440445eea9dfe569f12f5cba0.bindPopup(popup_c4eb5cbe94ea16dd0f569a142f589b38)
+        ;
+
+        
+    
+    
+            circle_marker_1f98cd3440445eea9dfe569f12f5cba0.bindTooltip(
+                `<div>
+                     Станция: Vaasa_nc (корреляция: 0.935)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d4a79d9c5d122e12539ff20bf942f2b9 = L.circleMarker(
+                [60.55817413330078, 27.207515716552734],
+                {"bubblingMouseEvents": true, "color": "#df644f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#df644f", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_17fb225dbbd939ec94a693b51876a570 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_2b022b9c82a20a351b277b24afec89f3 = $(`<div id="html_2b022b9c82a20a351b277b24afec89f3" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Hamina_nc<br><b>Корреляция:</b> 0.942<br><b>RMSE:</b> 15.34<br><b>BIAS:</b> 12.32<br><b>CRMSD:</b> 9.14<br><img src='processed_graphs/data/netcdf_data/Hamina_nc/Daily_SLA_Hamina_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Hamina_nc/Regr-Welch-Coherence_Hamina_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Hamina_nc/Seasonal_BIAS_Boxplot_Hamina_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Hamina_nc/Seasonal_RMSE_Boxplot_Hamina_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_17fb225dbbd939ec94a693b51876a570.setContent(html_2b022b9c82a20a351b277b24afec89f3);
+            
+        
+
+        circle_marker_d4a79d9c5d122e12539ff20bf942f2b9.bindPopup(popup_17fb225dbbd939ec94a693b51876a570)
+        ;
+
+        
+    
+    
+            circle_marker_d4a79d9c5d122e12539ff20bf942f2b9.bindTooltip(
+                `<div>
+                     Станция: Hamina_nc (корреляция: 0.942)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_403e502ecbec4a5b503eced9b6acc76a = L.circleMarker(
+                [59.558189392089844, 24.763164520263672],
+                {"bubblingMouseEvents": true, "color": "#bb1a2b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bb1a2b", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_2f5ad462f33967ed1476c22619c75e19 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_9a783f6bfe384150b9476bcf3f113530 = $(`<div id="html_9a783f6bfe384150b9476bcf3f113530" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Vahemadal_nc<br><b>Корреляция:</b> 0.958<br><b>RMSE:</b> 11.05<br><b>BIAS:</b> 8.27<br><b>CRMSD:</b> 7.33<br><img src='processed_graphs/data/netcdf_data/Vahemadal_nc/Daily_SLA_Vahemadal_nc_slice_23.02.2015_-_27.02.2016.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Vahemadal_nc/Regr-Welch-Coherence_Vahemadal_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Vahemadal_nc/Seasonal_BIAS_Boxplot_Vahemadal_nc_2015_-_2018.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Vahemadal_nc/Seasonal_RMSE_Boxplot_Vahemadal_nc_2015_-_2018.png' width='150.0' height='150.0'></div>`)[0];
+                popup_2f5ad462f33967ed1476c22619c75e19.setContent(html_9a783f6bfe384150b9476bcf3f113530);
+            
+        
+
+        circle_marker_403e502ecbec4a5b503eced9b6acc76a.bindPopup(popup_2f5ad462f33967ed1476c22619c75e19)
+        ;
+
+        
+    
+    
+            circle_marker_403e502ecbec4a5b503eced9b6acc76a.bindTooltip(
+                `<div>
+                     Станция: Vahemadal_nc (корреляция: 0.958)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_dcbde4a7aea594224e8cba5e47597b50 = L.circleMarker(
+                [59.87485122680664, 23.068784713745117],
+                {"bubblingMouseEvents": true, "color": "#e6745a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6745a", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_cfa2c5efe3a2d58d3f08636e70f869d3 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_1f3d6a7e70e86af3106ec1c39c62ef34 = $(`<div id="html_1f3d6a7e70e86af3106ec1c39c62ef34" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Hanko_nc<br><b>Корреляция:</b> 0.938<br><b>RMSE:</b> 13.30<br><b>BIAS:</b> 10.18<br><b>CRMSD:</b> 8.56<br><img src='processed_graphs/data/netcdf_data/Hanko_nc/Daily_SLA_Hanko_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Hanko_nc/Regr-Welch-Coherence_Hanko_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Hanko_nc/Seasonal_BIAS_Boxplot_Hanko_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Hanko_nc/Seasonal_RMSE_Boxplot_Hanko_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_cfa2c5efe3a2d58d3f08636e70f869d3.setContent(html_1f3d6a7e70e86af3106ec1c39c62ef34);
+            
+        
+
+        circle_marker_dcbde4a7aea594224e8cba5e47597b50.bindPopup(popup_cfa2c5efe3a2d58d3f08636e70f869d3)
+        ;
+
+        
+    
+    
+            circle_marker_dcbde4a7aea594224e8cba5e47597b50.bindTooltip(
+                `<div>
+                     Станция: Hanko_nc (корреляция: 0.938)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_bb7fade01e590882bab72691b8f06d8a = L.circleMarker(
+                [57.04156494140625, 23.985416412353516],
+                {"bubblingMouseEvents": true, "color": "#ec8266", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ec8266", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_44ce4928c4ac82d25ab75dc9ee95c18f = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_48e0563658e0e32921bef671e16db1de = $(`<div id="html_48e0563658e0e32921bef671e16db1de" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Daugavgriva_nc<br><b>Корреляция:</b> 0.933<br><b>RMSE:</b> 9.89<br><b>BIAS:</b> 1.40<br><b>CRMSD:</b> 9.79<br><img src='processed_graphs/data/netcdf_data/Daugavgriva_nc/Daily_SLA_Daugavgriva_nc_slice_27.01.2005_-_27.05.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Daugavgriva_nc/Regr-Welch-Coherence_Daugavgriva_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Daugavgriva_nc/Seasonal_BIAS_Boxplot_Daugavgriva_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Daugavgriva_nc/Seasonal_RMSE_Boxplot_Daugavgriva_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_44ce4928c4ac82d25ab75dc9ee95c18f.setContent(html_48e0563658e0e32921bef671e16db1de);
+            
+        
+
+        circle_marker_bb7fade01e590882bab72691b8f06d8a.bindPopup(popup_44ce4928c4ac82d25ab75dc9ee95c18f)
+        ;
+
+        
+    
+    
+            circle_marker_bb7fade01e590882bab72691b8f06d8a.bindTooltip(
+                `<div>
+                     Станция: Daugavgriva_nc (корреляция: 0.933)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c368168c2c2faaf69db78804a2da2759 = L.circleMarker(
+                [59.60818862915039, 25.096485137939453],
+                {"bubblingMouseEvents": true, "color": "#e36c54", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e36c54", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_34d0423d2a50cad463a2e6c61d810aa7 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_bd270afe86e2ea38364ef794d9138d2b = $(`<div id="html_bd270afe86e2ea38364ef794d9138d2b" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kelnase_nc<br><b>Корреляция:</b> 0.940<br><b>RMSE:</b> 22.89<br><b>BIAS:</b> 21.26<br><b>CRMSD:</b> 8.47<br><img src='processed_graphs/data/netcdf_data/Kelnase_nc/Daily_SLA_Kelnase_nc_slice_07.02.2017_-_06.02.2018.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Kelnase_nc/Regr-Welch-Coherence_Kelnase_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Kelnase_nc/Seasonal_BIAS_Boxplot_Kelnase_nc_2017_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Kelnase_nc/Seasonal_RMSE_Boxplot_Kelnase_nc_2017_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_34d0423d2a50cad463a2e6c61d810aa7.setContent(html_bd270afe86e2ea38364ef794d9138d2b);
+            
+        
+
+        circle_marker_c368168c2c2faaf69db78804a2da2759.bindPopup(popup_34d0423d2a50cad463a2e6c61d810aa7)
+        ;
+
+        
+    
+    
+            circle_marker_c368168c2c2faaf69db78804a2da2759.bindTooltip(
+                `<div>
+                     Станция: Kelnase_nc (корреляция: 0.940)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_fafe73fdc92131c6bcebdc63fc8577f5 = L.circleMarker(
+                [58.74153518676758, 22.4854736328125],
+                {"bubblingMouseEvents": true, "color": "#edd0c1", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#edd0c1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_bb5f8e6e1029b003450b512c40e8a6b7 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_b0d61a53bfe096a763b974edd1730c4c = $(`<div id="html_b0d61a53bfe096a763b974edd1730c4c" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Soru_nc<br><b>Корреляция:</b> 0.901<br><b>RMSE:</b> 17.22<br><b>BIAS:</b> 13.90<br><b>CRMSD:</b> 10.16<br><img src='processed_graphs/data/netcdf_data/Soru_nc/Daily_SLA_Soru_nc_slice_14.11.2005_-_31.12.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Soru_nc/Regr-Welch-Coherence_Soru_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Soru_nc/Seasonal_BIAS_Boxplot_Soru_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Soru_nc/Seasonal_RMSE_Boxplot_Soru_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_bb5f8e6e1029b003450b512c40e8a6b7.setContent(html_b0d61a53bfe096a763b974edd1730c4c);
+            
+        
+
+        circle_marker_fafe73fdc92131c6bcebdc63fc8577f5.bindPopup(popup_bb5f8e6e1029b003450b512c40e8a6b7)
+        ;
+
+        
+    
+    
+            circle_marker_fafe73fdc92131c6bcebdc63fc8577f5.bindTooltip(
+                `<div>
+                     Станция: Soru_nc (корреляция: 0.901)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_56ef961963ef03016563cf8357d51373 = L.circleMarker(
+                [61.608158111572266, 21.485511779785156],
+                {"bubblingMouseEvents": true, "color": "#ea7d61", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ea7d61", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_dfaa46b87c17c6c3f8b29e5acd2e65d7 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_5d70a8769f628a43ab2f8990c532e4a3 = $(`<div id="html_5d70a8769f628a43ab2f8990c532e4a3" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Pori_nc<br><b>Корреляция:</b> 0.935<br><b>RMSE:</b> 13.94<br><b>BIAS:</b> 10.88<br><b>CRMSD:</b> 8.71<br><img src='processed_graphs/data/netcdf_data/Pori_nc/Daily_SLA_Pori_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Pori_nc/Regr-Welch-Coherence_Pori_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Pori_nc/Seasonal_BIAS_Boxplot_Pori_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Pori_nc/Seasonal_RMSE_Boxplot_Pori_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_dfaa46b87c17c6c3f8b29e5acd2e65d7.setContent(html_5d70a8769f628a43ab2f8990c532e4a3);
+            
+        
+
+        circle_marker_56ef961963ef03016563cf8357d51373.bindPopup(popup_dfaa46b87c17c6c3f8b29e5acd2e65d7)
+        ;
+
+        
+    
+    
+            circle_marker_56ef961963ef03016563cf8357d51373.bindTooltip(
+                `<div>
+                     Станция: Pori_nc (корреляция: 0.935)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a1cf0e987f5cf8562aca51cc68558807 = L.circleMarker(
+                [60.02484893798828, 29.846303939819336],
+                {"bubblingMouseEvents": true, "color": "#dd604c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dd604c", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_253b02e4249a2e1521d00021fd342135 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_a5cbf318399d1dc8c40d453044350e44 = $(`<div id="html_a5cbf318399d1dc8c40d453044350e44" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Kronstadt_nc<br><b>Корреляция:</b> 0.943<br><b>RMSE:</b> 15.42<br><b>BIAS:</b> 11.78<br><b>CRMSD:</b> 9.95<br><img src='processed_graphs/data/netcdf_data/Kronstadt_nc/Daily_SLA_Kronstadt_nc_slice_20.10.2005_-_03.07.2007.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Kronstadt_nc/Regr-Welch-Coherence_Kronstadt_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Kronstadt_nc/Seasonal_BIAS_Boxplot_Kronstadt_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Kronstadt_nc/Seasonal_RMSE_Boxplot_Kronstadt_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_253b02e4249a2e1521d00021fd342135.setContent(html_a5cbf318399d1dc8c40d453044350e44);
+            
+        
+
+        circle_marker_a1cf0e987f5cf8562aca51cc68558807.bindPopup(popup_253b02e4249a2e1521d00021fd342135)
+        ;
+
+        
+    
+    
+            circle_marker_a1cf0e987f5cf8562aca51cc68558807.bindTooltip(
+                `<div>
+                     Станция: Kronstadt_nc (корреляция: 0.943)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_04c846a0da0b90925f0a3204b5e390ab = L.circleMarker(
+                [64.70794677734375, 24.485397338867188],
+                {"bubblingMouseEvents": true, "color": "#f08d6f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f08d6f", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_58953915521622aeb5debadd64ae485e = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_7f31f4044352a947d8a9d0f1ab9faffc = $(`<div id="html_7f31f4044352a947d8a9d0f1ab9faffc" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Raahe_nc<br><b>Корреляция:</b> 0.930<br><b>RMSE:</b> 16.88<br><b>BIAS:</b> 13.52<br><b>CRMSD:</b> 10.10<br><img src='processed_graphs/data/netcdf_data/Raahe_nc/Daily_SLA_Raahe_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Raahe_nc/Regr-Welch-Coherence_Raahe_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Raahe_nc/Seasonal_BIAS_Boxplot_Raahe_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Raahe_nc/Seasonal_RMSE_Boxplot_Raahe_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_58953915521622aeb5debadd64ae485e.setContent(html_7f31f4044352a947d8a9d0f1ab9faffc);
+            
+        
+
+        circle_marker_04c846a0da0b90925f0a3204b5e390ab.bindPopup(popup_58953915521622aeb5debadd64ae485e)
+        ;
+
+        
+    
+    
+            circle_marker_04c846a0da0b90925f0a3204b5e390ab.bindTooltip(
+                `<div>
+                     Станция: Raahe_nc (корреляция: 0.930)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_754913b31d7a997569caf2e57343d487 = L.circleMarker(
+                [59.04153060913086, 22.791017532348633],
+                {"bubblingMouseEvents": true, "color": "#f5a081", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f5a081", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_4f9fd222f0232275e5002a3b30efb145 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_c4fdfacf9fc66aad0ca7dcd5bc5a470b = $(`<div id="html_c4fdfacf9fc66aad0ca7dcd5bc5a470b" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Lehtma_nc<br><b>Корреляция:</b> 0.924<br><b>RMSE:</b> 18.15<br><b>BIAS:</b> 15.24<br><b>CRMSD:</b> 9.86<br><img src='processed_graphs/data/netcdf_data/Lehtma_nc/Daily_SLA_Lehtma_nc_slice_23.10.2006_-_03.11.2007.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Lehtma_nc/Regr-Welch-Coherence_Lehtma_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Lehtma_nc/Seasonal_BIAS_Boxplot_Lehtma_nc_2006_-_2019.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Lehtma_nc/Seasonal_RMSE_Boxplot_Lehtma_nc_2006_-_2019.png' width='150.0' height='150.0'></div>`)[0];
+                popup_4f9fd222f0232275e5002a3b30efb145.setContent(html_c4fdfacf9fc66aad0ca7dcd5bc5a470b);
+            
+        
+
+        circle_marker_754913b31d7a997569caf2e57343d487.bindPopup(popup_4f9fd222f0232275e5002a3b30efb145)
+        ;
+
+        
+    
+    
+            circle_marker_754913b31d7a997569caf2e57343d487.bindTooltip(
+                `<div>
+                     Станция: Lehtma_nc (корреляция: 0.924)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c58a50ff05eeac0b4ebf055a2f013476 = L.circleMarker(
+                [60.2581787109375, 25.70757293701172],
+                {"bubblingMouseEvents": true, "color": "#d34d40", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d34d40", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_c4f446e5c5503cdf613a3d6711f90ba5 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_676834713d4e715c6b0dfb777b9515c8 = $(`<div id="html_676834713d4e715c6b0dfb777b9515c8" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Porvoo_nc<br><b>Корреляция:</b> 0.948<br><b>RMSE:</b> 19.31<br><b>BIAS:</b> 17.57<br><b>CRMSD:</b> 8.00<br><img src='processed_graphs/data/netcdf_data/Porvoo_nc/Daily_SLA_Porvoo_nc_slice_31.07.2014_-_30.07.2015.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Porvoo_nc/Regr-Welch-Coherence_Porvoo_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Porvoo_nc/Seasonal_BIAS_Boxplot_Porvoo_nc_2014_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Porvoo_nc/Seasonal_RMSE_Boxplot_Porvoo_nc_2014_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_c4f446e5c5503cdf613a3d6711f90ba5.setContent(html_676834713d4e715c6b0dfb777b9515c8);
+            
+        
+
+        circle_marker_c58a50ff05eeac0b4ebf055a2f013476.bindPopup(popup_c4f446e5c5503cdf613a3d6711f90ba5)
+        ;
+
+        
+    
+    
+            circle_marker_c58a50ff05eeac0b4ebf055a2f013476.bindTooltip(
+                `<div>
+                     Станция: Porvoo_nc (корреляция: 0.948)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4d465c83e721782549ef9bf262189f7e = L.circleMarker(
+                [54.39160919189453, 16.319042205810547],
+                {"bubblingMouseEvents": true, "color": "#f6a384", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f6a384", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_be95b6ee109b14d5e01962b936b98bb7 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_e2f5734c9f22e4ae4191d4ddb3ba8c99 = $(`<div id="html_e2f5734c9f22e4ae4191d4ddb3ba8c99" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Darlowo_nc<br><b>Корреляция:</b> 0.922<br><b>RMSE:</b> 8.01<br><b>BIAS:</b> 2.91<br><b>CRMSD:</b> 7.46<br><img src='processed_graphs/data/netcdf_data/Darlowo_nc/Daily_SLA_Darlowo_nc_slice_01.11.2020_-_31.10.2021.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Darlowo_nc/Regr-Welch-Coherence_Darlowo_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Darlowo_nc/Seasonal_BIAS_Boxplot_Darlowo_nc_2020_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Darlowo_nc/Seasonal_RMSE_Boxplot_Darlowo_nc_2020_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_be95b6ee109b14d5e01962b936b98bb7.setContent(html_e2f5734c9f22e4ae4191d4ddb3ba8c99);
+            
+        
+
+        circle_marker_4d465c83e721782549ef9bf262189f7e.bindPopup(popup_be95b6ee109b14d5e01962b936b98bb7)
+        ;
+
+        
+    
+    
+            circle_marker_4d465c83e721782549ef9bf262189f7e.bindTooltip(
+                `<div>
+                     Станция: Darlowo_nc (корреляция: 0.922)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_331a1a79494769ebbb48c21b7f069ca5 = L.circleMarker(
+                [54.80826950073242, 18.40229606628418],
+                {"bubblingMouseEvents": true, "color": "#ec8266", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ec8266", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_411d80f808cee91d5c310dc3f1594218 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_568ca751fa327fb920bcfbbf76726dc2 = $(`<div id="html_568ca751fa327fb920bcfbbf76726dc2" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Wladyslawowo_nc<br><b>Корреляция:</b> 0.933<br><b>RMSE:</b> 7.19<br><b>BIAS:</b> 0.24<br><b>CRMSD:</b> 7.18<br><img src='processed_graphs/data/netcdf_data/Wladyslawowo_nc/Daily_SLA_Wladyslawowo_nc_slice_01.11.2020_-_31.10.2021.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Wladyslawowo_nc/Regr-Welch-Coherence_Wladyslawowo_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Wladyslawowo_nc/Seasonal_BIAS_Boxplot_Wladyslawowo_nc_2020_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Wladyslawowo_nc/Seasonal_RMSE_Boxplot_Wladyslawowo_nc_2020_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_411d80f808cee91d5c310dc3f1594218.setContent(html_568ca751fa327fb920bcfbbf76726dc2);
+            
+        
+
+        circle_marker_331a1a79494769ebbb48c21b7f069ca5.bindPopup(popup_411d80f808cee91d5c310dc3f1594218)
+        ;
+
+        
+    
+    
+            circle_marker_331a1a79494769ebbb48c21b7f069ca5.bindTooltip(
+                `<div>
+                     Станция: Wladyslawowo_nc (корреляция: 0.933)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e2f02780d3669651a7bae25572822916 = L.circleMarker(
+                [58.908199310302734, 23.124338150024414],
+                {"bubblingMouseEvents": true, "color": "#e9795e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e9795e", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_631d206c33b27ed1b39ce077b8edf846 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_d16865f1805d6790c2d306f30ad609f6 = $(`<div id="html_d16865f1805d6790c2d306f30ad609f6" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Heltermaa_nc<br><b>Корреляция:</b> 0.936<br><b>RMSE:</b> 17.67<br><b>BIAS:</b> 15.27<br><b>CRMSD:</b> 8.89<br><img src='processed_graphs/data/netcdf_data/Heltermaa_nc/Daily_SLA_Heltermaa_nc_slice_01.01.2017_-_18.03.2018.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Heltermaa_nc/Regr-Welch-Coherence_Heltermaa_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Heltermaa_nc/Seasonal_BIAS_Boxplot_Heltermaa_nc_2017_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Heltermaa_nc/Seasonal_RMSE_Boxplot_Heltermaa_nc_2017_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_631d206c33b27ed1b39ce077b8edf846.setContent(html_d16865f1805d6790c2d306f30ad609f6);
+            
+        
+
+        circle_marker_e2f02780d3669651a7bae25572822916.bindPopup(popup_631d206c33b27ed1b39ce077b8edf846)
+        ;
+
+        
+    
+    
+            circle_marker_e2f02780d3669651a7bae25572822916.bindTooltip(
+                `<div>
+                     Станция: Heltermaa_nc (корреляция: 0.936)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_cc3d7e5b43816c9a307f90d6e1056876 = L.circleMarker(
+                [59.974849700927734, 30.179624557495117],
+                {"bubblingMouseEvents": true, "color": "#e36c54", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e36c54", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_59404246aefc492a5289fee2095fa5fe = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_4efe350929e4a173edf4501063d25820 = $(`<div id="html_4efe350929e4a173edf4501063d25820" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> StPetersburg_nc<br><b>Корреляция:</b> 0.940<br><b>RMSE:</b> 10.47<br><b>BIAS:</b> 0.41<br><b>CRMSD:</b> 10.46<br><img src='processed_graphs/data/netcdf_data/StPetersburg_nc/Daily_SLA_StPetersburg_nc_slice_21.07.2004_-_24.09.2005.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/StPetersburg_nc/Regr-Welch-Coherence_StPetersburg_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/StPetersburg_nc/Seasonal_BIAS_Boxplot_StPetersburg_nc_2004_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/StPetersburg_nc/Seasonal_RMSE_Boxplot_StPetersburg_nc_2004_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_59404246aefc492a5289fee2095fa5fe.setContent(html_4efe350929e4a173edf4501063d25820);
+            
+        
+
+        circle_marker_cc3d7e5b43816c9a307f90d6e1056876.bindPopup(popup_59404246aefc492a5289fee2095fa5fe)
+        ;
+
+        
+    
+    
+            circle_marker_cc3d7e5b43816c9a307f90d6e1056876.bindTooltip(
+                `<div>
+                     Станция: StPetersburg_nc (корреляция: 0.940)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ff3b793ea442043fdc506f4df81cd1a1 = L.circleMarker(
+                [60.40817642211914, 22.12437629699707],
+                {"bubblingMouseEvents": true, "color": "#e7755c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e7755c", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_4781c39193057c3cba646a8995aba9e8 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_c25ce784cc1d075b62bf885d8089ba08 = $(`<div id="html_c25ce784cc1d075b62bf885d8089ba08" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Turku_nc<br><b>Корреляция:</b> 0.937<br><b>RMSE:</b> 13.46<br><b>BIAS:</b> 10.40<br><b>CRMSD:</b> 8.53<br><img src='processed_graphs/data/netcdf_data/Turku_nc/Daily_SLA_Turku_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Turku_nc/Regr-Welch-Coherence_Turku_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Turku_nc/Seasonal_BIAS_Boxplot_Turku_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Turku_nc/Seasonal_RMSE_Boxplot_Turku_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_4781c39193057c3cba646a8995aba9e8.setContent(html_c25ce784cc1d075b62bf885d8089ba08);
+            
+        
+
+        circle_marker_ff3b793ea442043fdc506f4df81cd1a1.bindPopup(popup_4781c39193057c3cba646a8995aba9e8)
+        ;
+
+        
+    
+    
+            circle_marker_ff3b793ea442043fdc506f4df81cd1a1.bindTooltip(
+                `<div>
+                     Станция: Turku_nc (корреляция: 0.937)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b77e9448b7da30b89ce67515fe85e736 = L.circleMarker(
+                [59.324859619140625, 24.09652328491211],
+                {"bubblingMouseEvents": true, "color": "#ea7b60", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ea7b60", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_9b7a142c65ec038bbad2810ed243ec76 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_261e3d85466c95b18ad8a30973cc43f8 = $(`<div id="html_261e3d85466c95b18ad8a30973cc43f8" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Paldiski_nc<br><b>Корреляция:</b> 0.935<br><b>RMSE:</b> 19.19<br><b>BIAS:</b> 16.84<br><b>CRMSD:</b> 9.21<br><img src='processed_graphs/data/netcdf_data/Paldiski_nc/Daily_SLA_Paldiski_nc_slice_23.10.2006_-_18.02.2008.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Paldiski_nc/Regr-Welch-Coherence_Paldiski_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Paldiski_nc/Seasonal_BIAS_Boxplot_Paldiski_nc_2006_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Paldiski_nc/Seasonal_RMSE_Boxplot_Paldiski_nc_2006_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_9b7a142c65ec038bbad2810ed243ec76.setContent(html_261e3d85466c95b18ad8a30973cc43f8);
+            
+        
+
+        circle_marker_b77e9448b7da30b89ce67515fe85e736.bindPopup(popup_9b7a142c65ec038bbad2810ed243ec76)
+        ;
+
+        
+    
+    
+            circle_marker_b77e9448b7da30b89ce67515fe85e736.bindTooltip(
+                `<div>
+                     Станция: Paldiski_nc (корреляция: 0.935)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f5a1164b8d9ca125dfc3eb4f26c0f79c = L.circleMarker(
+                [59.49152374267578, 24.81871795654297],
+                {"bubblingMouseEvents": true, "color": "#e06650", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e06650", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_c56eb54734a948f2db321df46eef8b7c = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_75a734b1977e19f15550e9e0e540e631 = $(`<div id="html_75a734b1977e19f15550e9e0e540e631" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Tallinn_nc<br><b>Корреляция:</b> 0.941<br><b>RMSE:</b> 15.96<br><b>BIAS:</b> 13.30<br><b>CRMSD:</b> 8.83<br><img src='processed_graphs/data/netcdf_data/Tallinn_nc/Daily_SLA_Tallinn_nc_slice_14.11.2005_-_09.12.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Tallinn_nc/Regr-Welch-Coherence_Tallinn_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Tallinn_nc/Seasonal_BIAS_Boxplot_Tallinn_nc_2005_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Tallinn_nc/Seasonal_RMSE_Boxplot_Tallinn_nc_2005_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_c56eb54734a948f2db321df46eef8b7c.setContent(html_75a734b1977e19f15550e9e0e540e631);
+            
+        
+
+        circle_marker_f5a1164b8d9ca125dfc3eb4f26c0f79c.bindPopup(popup_c56eb54734a948f2db321df46eef8b7c)
+        ;
+
+        
+    
+    
+            circle_marker_f5a1164b8d9ca125dfc3eb4f26c0f79c.bindTooltip(
+                `<div>
+                     Станция: Tallinn_nc (корреляция: 0.941)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c326e53073e8e7599cbc10c54b3d391b = L.circleMarker(
+                [55.691585540771484, 21.096637725830078],
+                {"bubblingMouseEvents": true, "color": "#f7b598", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f7b598", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_872fd5feee7cd7c6c0a0276e5adfa443 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_d092321bb2d98e999804c4c54abcecc0 = $(`<div id="html_d092321bb2d98e999804c4c54abcecc0" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Klaipeda_nc<br><b>Корреляция:</b> 0.915<br><b>RMSE:</b> 9.48<br><b>BIAS:</b> -3.24<br><b>CRMSD:</b> 8.91<br><img src='processed_graphs/data/netcdf_data/Klaipeda_nc/Daily_SLA_Klaipeda_nc_slice_07.02.2006_-_24.02.2007.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Klaipeda_nc/Regr-Welch-Coherence_Klaipeda_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Klaipeda_nc/Seasonal_BIAS_Boxplot_Klaipeda_nc_2006_-_2014.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Klaipeda_nc/Seasonal_RMSE_Boxplot_Klaipeda_nc_2006_-_2014.png' width='150.0' height='150.0'></div>`)[0];
+                popup_872fd5feee7cd7c6c0a0276e5adfa443.setContent(html_d092321bb2d98e999804c4c54abcecc0);
+            
+        
+
+        circle_marker_c326e53073e8e7599cbc10c54b3d391b.bindPopup(popup_872fd5feee7cd7c6c0a0276e5adfa443)
+        ;
+
+        
+    
+    
+            circle_marker_c326e53073e8e7599cbc10c54b3d391b.bindTooltip(
+                `<div>
+                     Станция: Klaipeda_nc (корреляция: 0.915)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8211f5cd37b601ab035fe545e7de37b0 = L.circleMarker(
+                [58.641536712646484, 22.763240814208984],
+                {"bubblingMouseEvents": true, "color": "#ec8064", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ec8064", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_b58b03be73ebeb55007510c0b44f39ec = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_3ded78998dcd6ca68a6c37a38d204301 = $(`<div id="html_3ded78998dcd6ca68a6c37a38d204301" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Triigi_nc<br><b>Корреляция:</b> 0.934<br><b>RMSE:</b> 21.23<br><b>BIAS:</b> 19.45<br><b>CRMSD:</b> 8.49<br><img src='processed_graphs/data/netcdf_data/Triigi_nc/Daily_SLA_Triigi_nc_slice_23.03.2010_-_16.05.2011.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Triigi_nc/Regr-Welch-Coherence_Triigi_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Triigi_nc/Seasonal_BIAS_Boxplot_Triigi_nc_2010_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Triigi_nc/Seasonal_RMSE_Boxplot_Triigi_nc_2010_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_b58b03be73ebeb55007510c0b44f39ec.setContent(html_3ded78998dcd6ca68a6c37a38d204301);
+            
+        
+
+        circle_marker_8211f5cd37b601ab035fe545e7de37b0.bindPopup(popup_b58b03be73ebeb55007510c0b44f39ec)
+        ;
+
+        
+    
+    
+            circle_marker_8211f5cd37b601ab035fe545e7de37b0.bindTooltip(
+                `<div>
+                     Станция: Triigi_nc (корреляция: 0.934)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_abe489af63d8c12f3c68a191f1bf604d = L.circleMarker(
+                [58.8748664855957, 23.457658767700195],
+                {"bubblingMouseEvents": true, "color": "#e8775d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e8775d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_2a9bd3451c984a221272c8831e6a788d = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_a63055df8b90f4adbf327398991d1e44 = $(`<div id="html_a63055df8b90f4adbf327398991d1e44" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Rohukula_nc<br><b>Корреляция:</b> 0.936<br><b>RMSE:</b> 18.53<br><b>BIAS:</b> 15.93<br><b>CRMSD:</b> 9.47<br><img src='processed_graphs/data/netcdf_data/Rohukula_nc/Daily_SLA_Rohukula_nc_slice_30.11.2009_-_15.02.2011.png' width='300' height='111'><br><img src='processed_graphs/data/netcdf_data/Rohukula_nc/Regr-Welch-Coherence_Rohukula_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Rohukula_nc/Seasonal_BIAS_Boxplot_Rohukula_nc_2009_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Rohukula_nc/Seasonal_RMSE_Boxplot_Rohukula_nc_2009_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_2a9bd3451c984a221272c8831e6a788d.setContent(html_a63055df8b90f4adbf327398991d1e44);
+            
+        
+
+        circle_marker_abe489af63d8c12f3c68a191f1bf604d.bindPopup(popup_2a9bd3451c984a221272c8831e6a788d)
+        ;
+
+        
+    
+    
+            circle_marker_abe489af63d8c12f3c68a191f1bf604d.bindTooltip(
+                `<div>
+                     Станция: Rohukula_nc (корреляция: 0.936)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4a3f5e9b63a26d29e4d7cb724177ad86 = L.circleMarker(
+                [58.35820770263672, 24.540950775146484],
+                {"bubblingMouseEvents": true, "color": "#cc3f39", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc3f39", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_d23a0c9f716965f7182024eca76663e2 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_1223ea7d6f924d0cac09a71b53c7cc71 = $(`<div id="html_1223ea7d6f924d0cac09a71b53c7cc71" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Parnu_nc<br><b>Корреляция:</b> 0.951<br><b>RMSE:</b> 13.25<br><b>BIAS:</b> 9.78<br><b>CRMSD:</b> 8.94<br><img src='processed_graphs/data/netcdf_data/Parnu_nc/Daily_SLA_Parnu_nc_slice_22.10.2004_-_15.08.2006.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Parnu_nc/Regr-Welch-Coherence_Parnu_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Parnu_nc/Seasonal_BIAS_Boxplot_Parnu_nc_2004_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Parnu_nc/Seasonal_RMSE_Boxplot_Parnu_nc_2004_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_d23a0c9f716965f7182024eca76663e2.setContent(html_1223ea7d6f924d0cac09a71b53c7cc71);
+            
+        
+
+        circle_marker_4a3f5e9b63a26d29e4d7cb724177ad86.bindPopup(popup_d23a0c9f716965f7182024eca76663e2)
+        ;
+
+        
+    
+    
+            circle_marker_4a3f5e9b63a26d29e4d7cb724177ad86.bindTooltip(
+                `<div>
+                     Станция: Parnu_nc (корреляция: 0.951)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_57b74a86a50c98674e83dbb3b52e2ed2 = L.circleMarker(
+                [65.0911865234375, 25.374252319335938],
+                {"bubblingMouseEvents": true, "color": "#ea7d61", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ea7d61", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_243bd34a12643d6856e3fc9fdfa53d36 = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_30e39f6f05f18734bcb1d951175ee268 = $(`<div id="html_30e39f6f05f18734bcb1d951175ee268" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Oulu_nc<br><b>Корреляция:</b> 0.935<br><b>RMSE:</b> 18.36<br><b>BIAS:</b> 15.32<br><b>CRMSD:</b> 10.10<br><img src='processed_graphs/data/netcdf_data/Oulu_nc/Daily_SLA_Oulu_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Oulu_nc/Regr-Welch-Coherence_Oulu_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Oulu_nc/Seasonal_BIAS_Boxplot_Oulu_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Oulu_nc/Seasonal_RMSE_Boxplot_Oulu_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_243bd34a12643d6856e3fc9fdfa53d36.setContent(html_30e39f6f05f18734bcb1d951175ee268);
+            
+        
+
+        circle_marker_57b74a86a50c98674e83dbb3b52e2ed2.bindPopup(popup_243bd34a12643d6856e3fc9fdfa53d36)
+        ;
+
+        
+    
+    
+            circle_marker_57b74a86a50c98674e83dbb3b52e2ed2.bindTooltip(
+                `<div>
+                     Станция: Oulu_nc (корреляция: 0.935)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c053a38685a347cb1856080eb6c42aec = L.circleMarker(
+                [60.20817947387695, 25.013154983520508],
+                {"bubblingMouseEvents": true, "color": "#e7755c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e7755c", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_15f537d2d8643e09e503a81fe355a0a1);
+        
+    
+        var popup_13e6d3e3450aa834f0287251baffdbad = L.popup({"maxWidth": 350});
+
+        
+            
+                var html_1165c09e78792395daf2b80434d7b9d0 = $(`<div id="html_1165c09e78792395daf2b80434d7b9d0" style="width: 100.0%; height: 100.0%;"><b>Станция:</b> Helsinki_nc<br><b>Корреляция:</b> 0.937<br><b>RMSE:</b> 15.01<br><b>BIAS:</b> 12.10<br><b>CRMSD:</b> 8.87<br><img src='processed_graphs/data/netcdf_data/Helsinki_nc/Daily_SLA_Helsinki_nc_slice_01.01.1993_-_31.12.1993.png' width='300' height='112'><br><img src='processed_graphs/data/netcdf_data/Helsinki_nc/Regr-Welch-Coherence_Helsinki_nc.png' width='300' height='97'><br><img src='processed_graphs/data/netcdf_data/Helsinki_nc/Seasonal_BIAS_Boxplot_Helsinki_nc_1993_-_2021.png' width='150.0' height='150.0'><img src='processed_graphs/data/netcdf_data/Helsinki_nc/Seasonal_RMSE_Boxplot_Helsinki_nc_1993_-_2021.png' width='150.0' height='150.0'></div>`)[0];
+                popup_13e6d3e3450aa834f0287251baffdbad.setContent(html_1165c09e78792395daf2b80434d7b9d0);
+            
+        
+
+        circle_marker_c053a38685a347cb1856080eb6c42aec.bindPopup(popup_13e6d3e3450aa834f0287251baffdbad)
+        ;
+
+        
+    
+    
+            circle_marker_c053a38685a347cb1856080eb6c42aec.bindTooltip(
+                `<div>
+                     Станция: Helsinki_nc (корреляция: 0.937)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>
