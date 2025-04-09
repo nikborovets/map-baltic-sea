@@ -5,14 +5,12 @@ from datetime import timedelta
 
 app = Flask(__name__)
 
-# Конфигурация для production
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 31536000  # 1 год в секундах
 
 # Словарь для кэширования HTML-страницы
 html_cache = {'content': None, 'timestamp': 0}
 
-# Основная HTML-страница с картой
 @app.route('/')
 def serve_map():
     # Простое кэширование HTML страницы на сервере (обновляется каждые 12 часов)
@@ -30,7 +28,6 @@ def serve_map():
     response.headers['Cache-Control'] = 'public, max-age=3600'  # 1 час
     return response
 
-# Сервис статичных файлов для карты стандартного отклонения
 @app.route('/processed_graphs/<path:filename>')
 def serve_static_files(filename):
     directory = os.path.join(os.path.dirname(__file__), 'processed_graphs')
@@ -42,7 +39,6 @@ def serve_static_files(filename):
         
     return response
 
-# Добавляем обработку ошибок
 @app.errorhandler(404)
 def not_found(error):
     return "Файл не найден", 404
@@ -51,11 +47,9 @@ def not_found(error):
 def server_error(error):
     return "Внутренняя ошибка сервера", 500
 
-# Информация о здоровье сервиса
 @app.route('/health')
 def health():
     return "OK", 200
 
-# Запуск сервера только при прямом запуске файла
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8883)
