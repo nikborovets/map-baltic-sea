@@ -10,6 +10,20 @@ certbot certonly --standalone -d map.nikborovets.ru
 sudo apt update
 sudo apt install fail2ban -y
 ```
+
+Конфиги
+```bash
+<!-- а тут action -->
+/etc/fail2ban/action.d/iptables.conf
+
+<!-- тут jailы -->
+/etc/fail2ban/jail.local - может переопределять .conf
+/etc/fail2ban/jail.conf
+
+<!-- тут фильтры -->
+/etc/fail2ban/filter.d/nginx-custom-block.conf
+```
+
 ```bash
 #!/bin/bash
 
@@ -28,6 +42,16 @@ ignoreregex =
 
 cat >>/etc/fail2ban/jail.local <<'EOF'
 
+[sshd]
+enabled = true
+port    = ssh
+filter  = sshd[mode=aggressive]
+backend = systemd
+maxretry = 1
+findtime = 300
+bantime = 86400
+
+
 [nginx-custom-block]
 enabled = true
 port    = http,https
@@ -35,21 +59,32 @@ filter  = nginx-custom-block
 logpath = /var/log/nginx/access.log
 backend = polling
 maxretry = 1
-findtime = 60
-bantime = 3600
-action = iptables-multiport[name=nginx-custom-block, port="http,https"]
+findtime = 120
+bantime = 86400
+action = iptables-dockeruser
+
 EOF
 
-systemctl restart fail2ban
-fail2ban-client status nginx-custom-block
-
 sudo fail2ban-regex /var/log/nginx/access.log /etc/fail2ban/filter.d/nginx-custom-block.conf --print-all-matched
+sudo fail2ban-regex /var/log/auth.log /etc/fail2ban/filter.d/sshd.conf
+
+systemctl restart fail2ban
+
+sudo fail2ban-client status sshd
 sudo fail2ban-client status nginx-custom-block
-sudo iptables -L f2b-nginx-custom-block -n --line-numbers
+
+sudo iptables -L f2b-nginx-custom-block -n -v --line-numbers
+sudo iptables -L DOCKER-USER -n -v --line-numbers
 ```
 
+
+Логи
 ```
-/var/log/nginx/access.log
+sudo tail -f /var/log/fail2ban.log
+
+sudo tail -f /var/log/nginx/access.log
+
+sudo tail -f /var/log/auth.log
 ```
 
 ```bash
